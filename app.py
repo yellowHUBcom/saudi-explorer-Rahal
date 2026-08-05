@@ -13,16 +13,18 @@ st.set_page_config(
 )
 
 # ==========================================
-# Custom CSS Injection (Classic & Elegant Theme)
+# Custom CSS Injection (RTL & Classic Theme)
 # ==========================================
 st.markdown("""
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700;800&display=swap');
 
-/* Global Typography & Palette Setup */
-html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
+/* Force RTL Direction & Global Font Setup */
+html, body, [class*="css"] {
+    direction: rtl !important;
     font-family: 'Amiri', serif !important;
     color: #522504 !important;
+    text-align: right !important;
 }
 
 /* Background Customization */
@@ -32,6 +34,8 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
 
 [data-testid="stSidebar"] {
     background-color: #F4EBE1 !important;
+    direction: rtl !important;
+    text-align: right !important;
 }
 
 /* Brand Header Styling */
@@ -86,6 +90,8 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
     border: 1px solid rgba(82, 37, 4, 0.3) !important;
     border-radius: 8px !important;
     font-family: 'Amiri', serif !important;
+    direction: rtl !important;
+    text-align: right !important;
 }
 
 /* File Uploader Customization & Bug Fixes */
@@ -178,16 +184,10 @@ div[data-testid="stMetricValue"] {
 from pipeline import run_pipeline
 
 # ==========================================
-# Header Section (Logo & Branding)
+# Header Section (Logo & Branding - RTL Order)
 # ==========================================
-col_logo, col_text = st.columns([2, 6])
-
-with col_logo:
-    if os.path.exists("logo.png"):
-        try:
-            st.image("logo.png", width=140)
-        except Exception:
-            pass
+# عکست ترتيب الأعمدة لتناسب الـ RTL (النصوص يميناً والشعار يساراً)
+col_text, col_logo = st.columns([6, 2])
 
 with col_text:
     st.markdown(
@@ -206,6 +206,13 @@ with col_text:
         """,
         unsafe_allow_html=True,
     )
+
+with col_logo:
+    if os.path.exists("logo.png"):
+        try:
+            st.image("logo.png", width=140)
+        except Exception:
+            pass
 
 st.divider()
 
@@ -289,7 +296,6 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
     else:
         with st.spinner("جاري تحليل الطلب واسترجاع البيانات..."):
             
-            # Constructing the payload schema for the pipeline execution
             input_payload = {
                 "destination": manual_destination,
                 "question": (
@@ -303,10 +309,8 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
                 "interests": interests_input,
             }
 
-            # Execute pipeline and retrieve results
             result = run_pipeline(input_payload)
 
-            # Render output components based on execution status
             if result.get("status") == "error":
                 st.error(f"خطأ: {result.get('answer')}")
             else:
@@ -314,16 +318,13 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
                     f"**الوجهة المستهدفة:** {result.get('destination', 'غير محددة')}"
                 )
 
-                # Render operational warnings if available
                 if result.get("warnings"):
                     for warn in result["warnings"]:
                         st.warning(f"تنبيه: {warn}")
 
-                # Display core textual response
                 st.markdown("### الإجابة:")
                 st.write(result.get("answer"))
 
-                # Display structured daily itinerary if available
                 if result.get("itinerary"):
                     st.markdown("### جدول الرحلة المقترح:")
                     for day_plan in result["itinerary"]:
@@ -332,7 +333,6 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
                             st.write(f"**الظهيرة:** {day_plan.get('afternoon')}")
                             st.write(f"**المساء:** {day_plan.get('evening')}")
 
-                # Display budget allocation breakdown metrics
                 if result.get("budget") and "breakdown_sar" in result["budget"]:
                     st.markdown("### توزيع الميزانية التقديري (SAR):")
                     b_data = result["budget"]["breakdown_sar"]
@@ -342,7 +342,6 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
                     col3.metric("الأنشطة (20%)", f"{b_data['activities']} SAR")
                     col4.metric("المواصلات (10%)", f"{b_data['transportation']} SAR")
 
-                # Display technical metadata and references
                 st.divider()
                 st.caption(
                     f"الأدوات المستخدمة: {', '.join(result.get('tools_used', []))}"
