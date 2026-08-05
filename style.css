@@ -1,0 +1,52 @@
+@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+
+/* Global Font & Text Color */
+html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
+    font-family: 'Tajawal', sans-serif !important;
+    color: #522504 !important;
+}
+
+/* Main App Background */
+.stApp {
+    background-color: #FFF8F0 !important;
+}
+
+/* Sidebar Background */
+[data-testid="stSidebar"] {
+    background-color: #F4EBE1 !important;
+}
+
+/* Primary Buttons Styling */
+.stButton>button {
+    background-color: #522504 !important;
+    color: #FFF8F0 !important;
+    border-radius: 10px !important;
+    border: none !important;
+    font-weight: 700 !important;
+    font-family: 'Tajawal', sans-serif !important;
+}
+
+.stButton>button:hover {
+    background-color: #3b1a03 !important;
+    color: #FFFFFF !important;
+}
+
+/* Input Fields & Selectboxes */
+.stTextInput input, .stTextArea textarea, div[data-baseweb="select"] > div {
+    background-color: #FFFFFF !important;
+    color: #522504 !important;
+    border: 1px solid #522504 !important;
+    border-radius: 8px !important;
+}
+
+/* Expanders & Cards */
+div[data-aria-expanded="true"], div[data-testid="stExpander"] {
+    background-color: #F4EBE1 !important;
+    border: 1px solid #522504 !important;
+    border-radius: 8px !important;
+}
+
+/* Metrics Styling */
+div[data-testid="stMetricValue"] {
+    color: #522504 !important;
+}
