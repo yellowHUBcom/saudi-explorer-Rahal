@@ -22,59 +22,35 @@ def load_css(file_name="style.css"):
 
 # Apply Visual Identity from external file
 load_css("style.css")
-# --- Fixed Header Section (Standard Streamlit Handling) ---
 
-current_dir = os.path.dirname(os.path.abspath(__file__))
+# --- Fixed Header Section (Right Aligned Logo & Title - Single Instance) ---
+col_logo, col_text = st.columns([1, 6])
 
-logo_path = None
-for potential_name in ["logo.png"]:
-    full_path = os.path.join(current_dir, potential_name)
-    if os.path.exists(full_path):
-        logo_path = full_path
-        break
-
-if logo_path:
+with col_logo:
+  # التأكد من وجود اللوجو وعرضه مرة واحدة فقط بدقة
+  if os.path.exists("logo.png"):
     try:
-        logo_img = Image.open(logo_path)
-        st.image(logo_img, width=120)
-    except Exception as e:
-        st.error(f"لقيت الصورة بس ما قدرت أفتحها، السبب: {e}")
-else:
-    st.warning("⚠️ تنبيه للمطور: الكود لم يجد الصورة! هذه هي الملفات الموجودة في المجلد حالياً:")
-    st.write(os.listdir(current_dir))
+      st.image("logo.png", width=120)
+    except Exception:
+      pass
 
-# --- Fixed Header Section (Standard Streamlit Handling) ---
-# Check for available logo files (supports both logo.png and map-Rahal-2.png)
-logo_path = None
-for potential_name in ["logo.png", "map-Rahal-2.png"]:
-  if os.path.exists(potential_name):
-    logo_path = potential_name
-    break
-
-if logo_path:
-  try:
-    logo_img = Image.open(logo_path)
-    st.image(logo_img, width=120)
-  except Exception as e:
-    pass
-
-# 3. Render the Branding and Titles (Text Only).
-st.markdown(
-    """
-    <div style="text-align: right; padding-top: 10px; padding-bottom: 20px;">
-        <h1 style="font-size: 3.5rem; font-weight: 800; color: #522504; margin-bottom: 5px; line-height: 1.1;">
-            رَحّال
-        </h1>
-        <h3 style="font-size: 1.3rem; font-weight: 600; color: #522504; opacity: 0.9; margin-top: 0; margin-bottom: 8px;">
-            Rahhal - المساعد الذكي للسياحة السعودية
-        </h3>
-        <p style="font-size: 1.05rem; color: #522504; opacity: 0.75; margin: 0; line-height: 1.6;">
-            مساعدك التفاعلي للتخطيط للرحلات وتحليل معالم المملكة العربية السعودية
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+with col_text:
+  st.markdown(
+      """
+      <div style="text-align: right; padding-top: 0px; padding-bottom: 20px;">
+          <h1 style="font-size: 3.5rem; font-weight: 800; color: #522504; margin-bottom: 5px; line-height: 1.1;">
+              رَحّال
+          </h1>
+          <h3 style="font-size: 1.3rem; font-weight: 600; color: #522504; opacity: 0.9; margin-top: 0; margin-bottom: 8px;">
+              Rahhal - المساعد الذكي للسياحة السعودية
+          </h3>
+          <p style="font-size: 1.05rem; color: #522504; opacity: 0.75; margin: 0; line-height: 1.6;">
+              مساعدك التفاعلي للتخطيط للرحلات وتحليل معالم المملكة العربية السعودية
+          </p>
+      </div>
+      """,
+      unsafe_allow_html=True,
+  )
 
 st.divider()
 
