@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700;800&display=swap');
 
-/* Global Font & Color Setup - استخدام خط كلاسيكي فاخر */
+/* Global Font & Color Setup */
 html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
     font-family: 'Amiri', serif !important;
     color: #522504 !important;
@@ -40,7 +40,7 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
     margin: 0;
 }
 
-/* Primary Buttons Styling (مع حل مشكلة النص المختفي) */
+/* Primary Buttons Styling */
 .stButton>button {
     background-color: #522504 !important;
     color: #FFF8F0 !important;
@@ -50,10 +50,6 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
     font-family: 'Amiri', serif !important;
     font-size: 16px !important;
     padding: 0.5rem 1.5rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: auto !important;
 }
 
 .stButton>button:hover {
@@ -70,14 +66,32 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
     font-family: 'Amiri', serif !important;
 }
 
-/* File Uploader Fix (لمنع تداخل الأيقونات والنصوص) */
+[data-testid="stFileUploader"] {
+    width: 100% !important;
+}
+
 [data-testid="stFileUploader"] section {
-    padding: 10px !important;
+    padding: 8px !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+[data-testid="stFileUploader"] section div[data-testid="stMarkdownContainer"] p {
+    font-size: 0px !important;
+}
+
+[data-testid="stFileUploader"] section div[data-testid="stMarkdownContainer"] p::after {
+    content: "احرص على إرفاق صورة واضحة" !important;
+    font-size: 14px !important;
+    color: #522504 !important;
 }
 
 [data-testid="stFileUploader"] small {
     color: #522504 !important;
     opacity: 0.7 !important;
+    font-size: 12px !important;
 }
 
 /* Expanders & Cards */
