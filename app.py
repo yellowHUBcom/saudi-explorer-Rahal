@@ -14,45 +14,46 @@ st.set_page_config(
     page_title="Rahhal | رَحّال - AI Travel Assistant", layout="wide"
 )
 
-
 # --- Function to load external CSS ---
 def load_css(file_name="style.css"):
   if os.path.exists(file_name):
     with open(file_name, "r", encoding="utf-8") as f:
       st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
 
-
 # Apply Visual Identity from external file
 load_css("style.css")
 
-# --- Header Section (Logo + Branding Alignment) ---
-col_text, col_logo = st.columns([5, 1])
+# --- Fixed Header Section (Standard Streamlit Handling) ---
+# Ensure the logo file 'logo.png' exists in the root directory.
+if os.path.exists("logo.png"):
+  try:
+    # 1. Open and check the image size/integrity.
+    logo_img = Image.open("logo.png")
+    
+    # 2. Render the logo reliably at the top center.
+    st.image(logo_img, width=120)
+    
+  except Exception as e:
+    # Fail silently or log error if necessary, but don't crash.
+    pass
 
-with col_text:
-  st.markdown(
-      """
-        <div style="text-align: right; padding-bottom: 10px;">
-            <h1 style="font-size: 3.5rem; font-weight: 800; color: #522504; margin-bottom: 5px; line-height: 1.1;">
-                رَحّال
-            </h1>
-            <h3 style="font-size: 1.3rem; font-weight: 600; color: #522504; opacity: 0.9; margin-top: 0; margin-bottom: 8px;">
-                Rahhal - المساعد الذكي للسياحة السعودية
-            </h3>
-            <p style="font-size: 1.05rem; color: #522504; opacity: 0.75; margin: 0; line-height: 1.6;">
-                مساعدك التفاعلي للتخطيط للرحلات وتحليل معالم المملكة العربية السعودية
-            </p>
-        </div>
+# 3. Render the Branding and Titles (Text Only).
+st.markdown(
+    """
+    <div style="text-align: right; padding-top: 10px; padding-bottom: 20px;">
+        <h1 style="font-size: 3.5rem; font-weight: 800; color: #522504; margin-bottom: 5px; line-height: 1.1;">
+            رَحّال
+        </h1>
+        <h3 style="font-size: 1.3rem; font-weight: 600; color: #522504; opacity: 0.9; margin-top: 0; margin-bottom: 8px;">
+            Rahhal - المساعد الذكي للسياحة السعودية
+        </h3>
+        <p style="font-size: 1.05rem; color: #522504; opacity: 0.75; margin: 0; line-height: 1.6;">
+            مساعدك التفاعلي للتخطيط للرحلات وتحليل معالم المملكة العربية السعودية
+        </p>
+    </div>
     """,
-      unsafe_allow_html=True,
-  )
-
-with col_logo:
-  if os.path.exists("logo.png"):
-    try:
-      logo_img = Image.open("logo.png")
-      st.image(logo_img, width=110)
-    except Exception:
-      pass
+    unsafe_allow_html=True,
+)
 
 st.divider()
 
@@ -192,3 +193,4 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
           st.caption(
               f"المصادر المستند عليها: {', '.join(result.get('sources'))}"
           )
+            
