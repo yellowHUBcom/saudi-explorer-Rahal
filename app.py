@@ -22,6 +22,26 @@ def load_css(file_name="style.css"):
 
 # Apply Visual Identity from external file
 load_css("style.css")
+# --- Fixed Header Section (Standard Streamlit Handling) ---
+
+current_dir = os.path.dirname(os.path.abspath(__file__))
+
+logo_path = None
+for potential_name in ["logo.png", "map-Rahal-2.png", "logo.jpg", "logo.png.png"]:
+    full_path = os.path.join(current_dir, potential_name)
+    if os.path.exists(full_path):
+        logo_path = full_path
+        break
+
+if logo_path:
+    try:
+        logo_img = Image.open(logo_path)
+        st.image(logo_img, width=120)
+    except Exception as e:
+        st.error(f"لقيت الصورة بس ما قدرت أفتحها، السبب: {e}")
+else:
+    st.warning("⚠️ تنبيه للمطور: الكود لم يجد الصورة! هذه هي الملفات الموجودة في المجلد حالياً:")
+    st.write(os.listdir(current_dir))
 
 # --- Fixed Header Section (Standard Streamlit Handling) ---
 # Check for available logo files (supports both logo.png and map-Rahal-2.png)
