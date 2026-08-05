@@ -49,17 +49,17 @@
 - 🔄 **خط معالجة وتدفق موحد (Pipeline Orchestration):** الربط بين منطق العميل (Agent Logic) في `agent.py` مع ملف الأدوات `tools.py` لتغذية الواجهة دون حدوث تعارضات بيانات.
 - 🎨 **واجهة مستخدم تفاعلية (Streamlit Frontend):** تصميم سلس يتيح رفع الصور، إدخال التفضيلات، وعرض المخرجات بهيكلية واضحة وسريعة الاستجابة.
 
----
-
-## 🏗️ هيكلية المشروع والملفات (Architecture & Directory Structure)
-
-```text
-saudi-explorer/
-├── app.py                 # واجهة المستخدم الرئيسية (Streamlit UI)
-├── pipeline.py            # ملف التنسيق والربط بين الأجزاء المختلفة (Orchestration Pipeline)
-├── agent.py               # المنطق البرمجي للعميل الذكي واختيار الأدوات (Agent Logic)
-├── tools.py               # الأدوات المخصصة (إنشاء خطط السفر وحساب الميزانية)
-├── schemas.py             # هياكل البيانات والسكيمات الموحدة (Shared Output Schemas)
+---saudi-explorer/
+├── data/                  # 👈 مجلد البيانات والمعلومات السياحية (Knowledge Base)
+│   ├── landmarks.json     # بيانات المعالم والمواقع
+│   └── itineraries.csv    # الخطط والتوصيات المخزنة
+├── app.py                 
+├── pipeline.py            
+├── agent.py               
+├── tools.py               
+├── rag_module.py          
+├── schemas.py             
+...
 ├── requirements.txt       # ملف حزم وتدفق التبعيات البرمجية
 ├── pytest.ini             # إعدادات وتشغيل بيئة الاختبارات
 └── tests/                 # مجلد اختبارات الجودة والتكامل (Unit Tests)
