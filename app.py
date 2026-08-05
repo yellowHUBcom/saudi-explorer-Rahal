@@ -24,13 +24,13 @@ def load_css(file_name="style.css"):
 load_css("style.css")
 
 # --- Fixed Header Section (Right Aligned Logo & Title - Single Instance) ---
-col_logo, col_text = st.columns([1, 6])
+col_logo, col_text = st.columns([2, 6])
 
 with col_logo:
   # التأكد من وجود اللوجو وعرضه مرة واحدة فقط بدقة
   if os.path.exists("logo.png"):
     try:
-      st.image("logo.png", width=120)
+      st.image("logo.png", width=140)
     except Exception:
       pass
 
