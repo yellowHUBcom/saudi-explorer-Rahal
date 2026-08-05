@@ -24,17 +24,18 @@ def load_css(file_name="style.css"):
 load_css("style.css")
 
 # --- Fixed Header Section (Standard Streamlit Handling) ---
-# Ensure the logo file 'logo.png' exists in the root directory.
-if os.path.exists("logo.png"):
+# Check for available logo files (supports both logo.png and map-Rahal-2.png)
+logo_path = None
+for potential_name in ["logo.png", "map-Rahal-2.png"]:
+  if os.path.exists(potential_name):
+    logo_path = potential_name
+    break
+
+if logo_path:
   try:
-    # 1. Open and check the image size/integrity.
-    logo_img = Image.open("logo.png")
-    
-    # 2. Render the logo reliably at the top center.
+    logo_img = Image.open(logo_path)
     st.image(logo_img, width=120)
-    
   except Exception as e:
-    # Fail silently or log error if necessary, but don't crash.
     pass
 
 # 3. Render the Branding and Titles (Text Only).
@@ -193,4 +194,3 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
           st.caption(
               f"المصادر المستند عليها: {', '.join(result.get('sources'))}"
           )
-            
