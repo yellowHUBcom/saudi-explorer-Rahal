@@ -1,46 +1,24 @@
-@import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700;800&display=swap');
 
-<<<<<<< HEAD
-/* Global Font & Text Color */
-=======
-/* Global Font & Color Setup */
->>>>>>> 8d92eebf4952d671436b09afa2d12e01f309c6d9
+/* Global Font & Color Setup - استخدام خط كلاسيكي فاخر */
 html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
-    font-family: 'Tajawal', sans-serif !important;
+    font-family: 'Amiri', serif !important;
     color: #522504 !important;
 }
 
-<<<<<<< HEAD
-/* Main App Background */
-=======
 /* Backgrounds */
->>>>>>> 8d92eebf4952d671436b09afa2d12e01f309c6d9
 .stApp {
     background-color: #FFF8F0 !important;
 }
 
-<<<<<<< HEAD
-/* Sidebar Background */
-=======
->>>>>>> 8d92eebf4952d671436b09afa2d12e01f309c6d9
 [data-testid="stSidebar"] {
     background-color: #F4EBE1 !important;
 }
 
-<<<<<<< HEAD
-/* Primary Buttons Styling */
-.stButton>button {
-    background-color: #522504 !important;
-    color: #FFF8F0 !important;
-    border-radius: 10px !important;
-    border: none !important;
-    font-weight: 700 !important;
-    font-family: 'Tajawal', sans-serif !important;
-=======
 /* Header Container */
 .brand-title {
     font-size: 3.8rem;
-    font-weight: 800;
+    font-weight: 700;
     color: #522504;
     margin: 0;
     line-height: 1;
@@ -48,7 +26,7 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
 
 .brand-subtitle {
     font-size: 1.25rem;
-    font-weight: 600;
+    font-weight: 700;
     color: #522504;
     opacity: 0.9;
     margin-top: 6px;
@@ -62,16 +40,15 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
     margin: 0;
 }
 
-/* Primary Button */
+/* Primary Buttons Styling */
 .stButton>button {
     background-color: #522504 !important;
     color: #FFF8F0 !important;
     border-radius: 8px !important;
     border: none !important;
     font-weight: 700 !important;
-    font-family: 'Tajawal', sans-serif !important;
+    font-family: 'Amiri', serif !important;
     padding: 0.5rem 1.5rem !important;
->>>>>>> 8d92eebf4952d671436b09afa2d12e01f309c6d9
 }
 
 .stButton>button:hover {
@@ -79,41 +56,23 @@ html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
     color: #FFFFFF !important;
 }
 
-<<<<<<< HEAD
 /* Input Fields & Selectboxes */
-.stTextInput input, .stTextArea textarea, div[data-baseweb="select"] > div {
-    background-color: #FFFFFF !important;
-    color: #522504 !important;
-    border: 1px solid #522504 !important;
-    border-radius: 8px !important;
-}
-
-/* Expanders & Cards */
-div[data-aria-expanded="true"], div[data-testid="stExpander"] {
-    background-color: #F4EBE1 !important;
-    border: 1px solid #522504 !important;
-    border-radius: 8px !important;
-}
-
-/* Metrics Styling */
-=======
-/* Input Styles */
 .stTextInput input, .stTextArea textarea, div[data-baseweb="select"] > div {
     background-color: #FFFFFF !important;
     color: #522504 !important;
     border: 1px solid rgba(82, 37, 4, 0.3) !important;
     border-radius: 8px !important;
+    font-family: 'Amiri', serif !important;
 }
 
-/* Expander Cards */
+/* Expanders & Cards */
 div[data-aria-expanded="true"], div[data-testid="stExpander"] {
     background-color: #F4EBE1 !important;
     border: 1px solid rgba(82, 37, 4, 0.2) !important;
     border-radius: 8px !important;
 }
 
-/* Metrics */
->>>>>>> 8d92eebf4952d671436b09afa2d12e01f309c6d9
+/* Metrics Styling */
 div[data-testid="stMetricValue"] {
     color: #522504 !important;
 }
