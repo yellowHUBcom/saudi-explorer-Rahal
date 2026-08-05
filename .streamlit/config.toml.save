@@ -1,0 +1,7 @@
+cat << 'EOF' > .streamlit/config.toml
+[theme]
+primaryColor = "#522504"          # اللون الأساسي للأزرار والعناوين (بني غني)
+backgroundColor = "#FFF8F0"       # خلفية التطبيق الرئيسية (بيج دافئ)
+secondaryBackgroundColor = "#F4EBE1" # خلفية البطاقات والقائمة الجانبية (بيج بدرجة أعمق)
+textColor = "#522504"             # لون النصوص الرئيسية (بني داكن)
+
