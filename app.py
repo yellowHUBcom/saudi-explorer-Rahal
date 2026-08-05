@@ -11,7 +11,7 @@ load_dotenv()
 
 # Page Setup
 st.set_page_config(
-    page_title="Rahhal | رحال - AI Travel Assistant",
+    page_title="Rahhal | رحّال - AI Travel Assistant",
     layout="wide"
 )
 
@@ -73,7 +73,7 @@ interests_input = st.sidebar.multiselect(
 st.subheader("اسأل رحّال")
 user_question = st.text_input(
     "ما الذي ترغب بمعرفته عن وجهتك؟", 
-    placeholder="مثال: ما هي أفضل الأماكن للزيارة في العُلا، وما هي الأنشطة الموصى بها؟"
+    placeholder="وين الخطة يارحّال ؟"
 )
 
 if st.button("إرسال والاستفسار", type="primary"):
