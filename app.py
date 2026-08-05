@@ -27,7 +27,7 @@ load_css("style.css")
 current_dir = os.path.dirname(os.path.abspath(__file__))
 
 logo_path = None
-for potential_name in ["logo.png", "map-Rahal-2.png", "logo.jpg", "logo.png.png"]:
+for potential_name in ["logo.png"]:
     full_path = os.path.join(current_dir, potential_name)
     if os.path.exists(full_path):
         logo_path = full_path
