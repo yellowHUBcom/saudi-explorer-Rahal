@@ -3,61 +3,218 @@ from dotenv import load_dotenv
 from PIL import Image
 import streamlit as st
 
-# Import the core pipeline logic
-from pipeline import run_pipeline
-
-# Load environment variables (.env file)
+# ==========================================
+# Environment & Page Configuration
+# ==========================================
 load_dotenv()
 
-# Page Setup
 st.set_page_config(
     page_title="Rahhal | رَحّال - AI Travel Assistant", layout="wide"
 )
 
-# --- Function to load external CSS ---
-def load_css(file_name="style.css"):
-  if os.path.exists(file_name):
-    with open(file_name, "r", encoding="utf-8") as f:
-      st.markdown(f"<style>{f.read()}</style>", unsafe_allow_html=True)
+# ==========================================
+# Custom CSS Injection (Classic & Elegant Theme)
+# ==========================================
+st.markdown("""
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Tajawal:wght@400;500;700;800&display=swap');
 
-# Apply Visual Identity from external file
-load_css("style.css")
+/* Global Typography & Palette Setup */
+html, body, [class*="css"], div, p, span, h1, h2, h3, h4, label {
+    font-family: 'Amiri', serif !important;
+    color: #522504 !important;
+}
 
-# --- Fixed Header Section (Right Aligned Logo & Title - Single Instance) ---
+/* Background Customization */
+.stApp {
+    background-color: #FFF8F0 !important;
+}
+
+[data-testid="stSidebar"] {
+    background-color: #F4EBE1 !important;
+}
+
+/* Brand Header Styling */
+.brand-title {
+    font-size: 3.8rem;
+    font-weight: 700;
+    color: #522504;
+    margin: 0;
+    line-height: 1;
+}
+
+.brand-subtitle {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #522504;
+    opacity: 0.9;
+    margin-top: 6px;
+    margin-bottom: 4px;
+}
+
+.brand-desc {
+    font-size: 1rem;
+    color: #522504;
+    opacity: 0.75;
+    margin: 0;
+}
+
+/* Primary Action Buttons */
+.stButton>button {
+    background-color: #522504 !important;
+    color: #FFF8F0 !important;
+    border-radius: 8px !important;
+    border: none !important;
+    font-weight: 700 !important;
+    font-family: 'Amiri', serif !important;
+    font-size: 16px !important;
+    padding: 0.5rem 1.5rem !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+}
+
+.stButton>button:hover {
+    background-color: #3b1a03 !important;
+    color: #FFFFFF !important;
+}
+
+/* Form Inputs & Dropdowns */
+.stTextInput input, .stTextArea textarea, div[data-baseweb="select"] > div {
+    background-color: #FFFFFF !important;
+    color: #522504 !important;
+    border: 1px solid rgba(82, 37, 4, 0.3) !important;
+    border-radius: 8px !important;
+    font-family: 'Amiri', serif !important;
+}
+
+/* File Uploader Customization & Bug Fixes */
+[data-testid="stFileUploader"] {
+    width: 100% !important;
+    border: none !important;
+}
+
+[data-testid="stFileUploader"] section {
+    padding: 15px !important;
+    border: 1px solid rgba(82, 37, 4, 0.4) !important;
+    border-radius: 8px !important;
+    background-color: #FFFFFF !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    min-height: 120px !important;
+}
+
+[data-testid="stFileUploader"] section:focus,
+[data-testid="stFileUploader"] section:active,
+[data-testid="stFileUploader"] section:focus-within {
+    border: 2px solid #522504 !important;
+    box-shadow: none !important;
+    outline: none !important;
+}
+
+[data-testid="stFileUploader"] section div[data-testid="stMarkdownContainer"] {
+    display: block !important;
+    text-align: center !important;
+    margin-bottom: 5px !important;
+}
+
+[data-testid="stFileUploader"] section div[data-testid="stMarkdownContainer"] p {
+    font-size: 0px !important;
+    line-height: 0 !important;
+}
+
+[data-testid="stFileUploader"] section div[data-testid="stMarkdownContainer"] p::after {
+    content: "اسحب الصورة هنا أو اضغط للرفع" !important;
+    font-size: 14px !important;
+    color: #522504 !important;
+    font-family: 'Amiri', serif !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+[data-testid="stFileUploader"] section button {
+    background-color: #522504 !important;
+    color: #FFF8F0 !important;
+    border-radius: 6px !important;
+    font-family: 'Amiri', serif !important;
+    padding: 6px 12px !important;
+    margin-top: 10px !important;
+    border: none !important;
+}
+
+[data-testid="stFileUploader"] section button:hover {
+    background-color: #3b1a03 !important;
+}
+
+[data-testid="stFileUploader"] section svg {
+    fill: #522504 !important;
+    margin-bottom: 5px !important;
+}
+
+[data-testid="stFileUploader"] small {
+    color: #522504 !important;
+    opacity: 0.6 !important;
+    font-size: 11px !important;
+    margin-top: 8px !important;
+}
+
+/* Expandable Containers & Cards */
+div[data-aria-expanded="true"], div[data-testid="stExpander"] {
+    background-color: #F4EBE1 !important;
+    border: 1px solid rgba(82, 37, 4, 0.2) !important;
+    border-radius: 8px !important;
+}
+
+/* Metric Display Elements */
+div[data-testid="stMetricValue"] {
+    color: #522504 !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# Import core backend execution pipeline
+from pipeline import run_pipeline
+
+# ==========================================
+# Header Section (Logo & Branding)
+# ==========================================
 col_logo, col_text = st.columns([2, 6])
 
 with col_logo:
-  # التأكد من وجود اللوجو وعرضه مرة واحدة فقط بدقة
-  if os.path.exists("logo.png"):
-    try:
-      st.image("logo.png", width=140)
-    except Exception:
-      pass
+    if os.path.exists("logo.png"):
+        try:
+            st.image("logo.png", width=140)
+        except Exception:
+            pass
 
 with col_text:
-  st.markdown(
-      """
-      <div style="text-align: right; padding-top: 0px; padding-bottom: 20px;">
-          <h1 style="font-size: 3.5rem; font-weight: 800; color: #522504; margin-bottom: 5px; line-height: 1.1;">
-              رَحّال
-          </h1>
-          <h3 style="font-size: 1.3rem; font-weight: 600; color: #522504; opacity: 0.9; margin-top: 0; margin-bottom: 8px;">
-              Rahhal - المساعد الذكي للسياحة السعودية
-          </h3>
-          <p style="font-size: 1.05rem; color: #522504; opacity: 0.75; margin: 0; line-height: 1.6;">
-              مساعدك التفاعلي للتخطيط للرحلات وتحليل معالم المملكة العربية السعودية
-          </p>
-      </div>
-      """,
-      unsafe_allow_html=True,
-  )
+    st.markdown(
+        """
+        <div style="text-align: right; padding-top: 0px; padding-bottom: 20px;">
+            <h1 class="brand-title">
+                رَحّال
+            </h1>
+            <h3 class="brand-subtitle">
+                Rahhal - المساعد الذكي للسياحة السعودية
+            </h3>
+            <p class="brand-desc">
+                مساعدك التفاعلي للتخطيط للرحلات وتحليل معالم المملكة العربية السعودية
+            </p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
 st.divider()
 
-# Sidebar - User Inputs
+# ==========================================
+# Sidebar Configuration & User Preferences
+# ==========================================
 st.sidebar.header("تفاصيل الرحلة (Preferences)")
 
-# Destination Selection
+# Destination Selection Handler
 destination_options = [
     "تحديد تلقائي (أو ارفع صورة)",
     "Riyadh",
@@ -73,7 +230,7 @@ manual_destination = (
     None if selected_dest == "تحديد تلقائي (أو ارفع صورة)" else selected_dest
 )
 
-# Image Upload for Gemini Vision
+# Vision Model File Uploader
 st.sidebar.subheader("تحليل معلم سياحي")
 uploaded_file = st.sidebar.file_uploader(
     "ارفع صورة لمعلم في المملكة",
@@ -83,15 +240,15 @@ uploaded_file = st.sidebar.file_uploader(
 uploaded_image = None
 
 if uploaded_file:
-  try:
-    uploaded_image = Image.open(uploaded_file)
-    st.sidebar.image(
-        uploaded_image, caption="الصورة المرفوعة", use_container_width=True
-    )
-  except Exception:
-    st.sidebar.error("تعذر قراءة ملف الصورة، يرجى رفع صورة صالحة.")
+    try:
+        uploaded_image = Image.open(uploaded_file)
+        st.sidebar.image(
+            uploaded_image, caption="الصورة المرفوعة", use_container_width=True
+        )
+    except Exception:
+        st.sidebar.error("تعذر قراءة ملف الصورة، يرجى رفع صورة صالحة.")
 
-# Trip Details
+# Trip Duration & Budget Inputs
 days = st.sidebar.number_input(
     "عدد أيام الرحلة (اختياري):",
     min_value=0,
@@ -108,6 +265,7 @@ budget = st.sidebar.number_input(
     key="budget_input",
 )
 
+# User Interests Filter
 interests_input = st.sidebar.multiselect(
     "الاهتمامات:",
     ["تاريخ وثقافة", "مغامرات وطبيعة", "تسوق ومطاعم", "استرخاء ورخاء"],
@@ -115,7 +273,9 @@ interests_input = st.sidebar.multiselect(
     key="interests_select",
 )
 
-# Main Query Area
+# ==========================================
+# Main Interaction & Query Processing Area
+# ==========================================
 st.subheader("اسأل رحّال")
 user_question = st.text_input(
     "ما الذي ترغب بمعرفته عن وجهتك؟",
@@ -124,69 +284,70 @@ user_question = st.text_input(
 )
 
 if st.button("إرسال والاستفسار", type="primary", key="submit_btn"):
-  if not user_question and not uploaded_file:
-    st.warning("رجاءً ادخل سؤالاً أو ارفع صورة لتفعيل البحث.")
-  else:
-    with st.spinner("جاري تحليل الطلب واسترجاع البيانات..."):
-      # Construct input payload matching UserInputSchema
-      input_payload = {
-          "destination": manual_destination,
-          "question": (
-              user_question
-              if user_question
-              else "ما هو هذا المعلم وما الخطة المقترحة لزيارته؟"
-          ),
-          "image": uploaded_image,
-          "days": int(days) if days > 0 else None,
-          "budget": float(budget) if budget > 0 else None,
-          "interests": interests_input,
-      }
+    if not user_question and not uploaded_file:
+        st.warning("رجاءً ادخل سؤالاً أو ارفع صورة لتفعيل البحث.")
+    else:
+        with st.spinner("جاري تحليل الطلب واسترجاع البيانات..."):
+            
+            # Constructing the payload schema for the pipeline execution
+            input_payload = {
+                "destination": manual_destination,
+                "question": (
+                    user_question
+                    if user_question
+                    else "ما هو هذا المعلم وما الخطة المقترحة لزيارته؟"
+                ),
+                "image": uploaded_image,
+                "days": int(days) if days > 0 else None,
+                "budget": float(budget) if budget > 0 else None,
+                "interests": interests_input,
+            }
 
-      # Run the Pipeline
-      result = run_pipeline(input_payload)
+            # Execute pipeline and retrieve results
+            result = run_pipeline(input_payload)
 
-      # Process & Render Output
-      if result.get("status") == "error":
-        st.error(f"خطأ: {result.get('answer')}")
-      else:
-        st.success(
-            f"**الوجهة المستهدفة:** {result.get('destination', 'غير محددة')}"
-        )
+            # Render output components based on execution status
+            if result.get("status") == "error":
+                st.error(f"خطأ: {result.get('answer')}")
+            else:
+                st.success(
+                    f"**الوجهة المستهدفة:** {result.get('destination', 'غير محددة')}"
+                )
 
-        # Render Warnings (if any)
-        if result.get("warnings"):
-          for warn in result["warnings"]:
-            st.warning(f"تنبيه: {warn}")
+                # Render operational warnings if available
+                if result.get("warnings"):
+                    for warn in result["warnings"]:
+                        st.warning(f"تنبيه: {warn}")
 
-        # Main Answer
-        st.markdown("### الإجابة:")
-        st.write(result.get("answer"))
+                # Display core textual response
+                st.markdown("### الإجابة:")
+                st.write(result.get("answer"))
 
-        # Itinerary Display
-        if result.get("itinerary"):
-          st.markdown("### جدول الرحلة المقترح:")
-          for day_plan in result["itinerary"]:
-            with st.expander(f"اليوم {day_plan['day']}"):
-              st.write(f"**الصباح:** {day_plan.get('morning')}")
-              st.write(f"**الظهيرة:** {day_plan.get('afternoon')}")
-              st.write(f"**المساء:** {day_plan.get('evening')}")
+                # Display structured daily itinerary if available
+                if result.get("itinerary"):
+                    st.markdown("### جدول الرحلة المقترح:")
+                    for day_plan in result["itinerary"]:
+                        with st.expander(f"اليوم {day_plan['day']}"):
+                            st.write(f"**الصباح:** {day_plan.get('morning')}")
+                            st.write(f"**الظهيرة:** {day_plan.get('afternoon')}")
+                            st.write(f"**المساء:** {day_plan.get('evening')}")
 
-        # Budget Breakdown Display
-        if result.get("budget") and "breakdown_sar" in result["budget"]:
-          st.markdown("### توزيع الميزانية التقديري (SAR):")
-          b_data = result["budget"]["breakdown_sar"]
-          col1, col2, col3, col4 = st.columns(4)
-          col1.metric("السكن (40%)", f"{b_data['accommodation']} SAR")
-          col2.metric("الطعام (30%)", f"{b_data['food_and_dining']} SAR")
-          col3.metric("الأنشطة (20%)", f"{b_data['activities']} SAR")
-          col4.metric("المواصلات (10%)", f"{b_data['transportation']} SAR")
+                # Display budget allocation breakdown metrics
+                if result.get("budget") and "breakdown_sar" in result["budget"]:
+                    st.markdown("### توزيع الميزانية التقديري (SAR):")
+                    b_data = result["budget"]["breakdown_sar"]
+                    col1, col2, col3, col4 = st.columns(4)
+                    col1.metric("السكن (40%)", f"{b_data['accommodation']} SAR")
+                    col2.metric("الطعام (30%)", f"{b_data['food_and_dining']} SAR")
+                    col3.metric("الأنشطة (20%)", f"{b_data['activities']} SAR")
+                    col4.metric("المواصلات (10%)", f"{b_data['transportation']} SAR")
 
-        # Metadata & Sources
-        st.divider()
-        st.caption(
-            f"الأدوات المستخدمة: {', '.join(result.get('tools_used', []))}"
-        )
-        if result.get("sources"):
-          st.caption(
-              f"المصادر المستند عليها: {', '.join(result.get('sources'))}"
-          )
+                # Display technical metadata and references
+                st.divider()
+                st.caption(
+                    f"الأدوات المستخدمة: {', '.join(result.get('tools_used', []))}"
+                )
+                if result.get("sources"):
+                    st.caption(
+                        f"المصادر المستند عليها: {', '.join(result.get('sources'))}"
+                    )
