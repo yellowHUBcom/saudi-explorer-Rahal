@@ -7,14 +7,6 @@ def run_pipeline(input_payload: dict[str, Any]) -> dict[str, Any]:
     """
     Executes the main application pipeline by orchestrating Vision, RAG, 
     and Agent operations based on user input.
-
-    Args:
-        input_payload (dict[str, Any]): Dictionary containing user inputs including
-                                        'question', 'destination', 'image', 'days',
-                                        'travelers', 'budget', and 'interests'.
-
-    Returns:
-        dict[str, Any]: Structured dictionary compliant with the Shared Output Schema.
     """
     question = str(input_payload.get("question") or "").strip()
     destination = input_payload.get("destination")
