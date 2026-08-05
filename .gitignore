@@ -1,10 +1,49 @@
+# Environment variables
 .env
-__pycache__/
-*.pyc
+.env.local
+
+# Virtual environments
 .venv/
 venv/
-.streamlit/secrets.toml
-.env
-env.
-.env
-env.
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+
+# Testing cache
+.pytest_cache/
+.coverage
+htmlcov/
+
+# RAG local database
+chroma_db/
+
+# VS Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# macOS files
+.DS_Store
+__MACOSX/
+
+# Windows files
+Thumbs.db
+Desktop.ini
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Logs
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+
+# Zip files
+*.zip
