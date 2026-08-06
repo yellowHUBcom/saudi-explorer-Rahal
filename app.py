@@ -329,10 +329,31 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
                     st.markdown("### جدول الرحلة المقترح:")
                     for day_plan in result["itinerary"]:
                         with st.expander(f"اليوم {day_plan['day']}"):
-                            st.write(f"**الصباح:** {day_plan.get('morning')}")
-                            st.write(f"**الظهيرة:** {day_plan.get('afternoon')}")
-                            st.write(f"**المساء:** {day_plan.get('evening')}")
+                            activities = day_plan.get("activities", [])
 
+                            if activities:
+                                for activity in activities:
+                                    time = activity.get("time", "وقت غير محدد")
+                                    place_name = activity.get("place_name", "مكان غير محدد")
+                                    description = activity.get("description", "")
+                                    duration = activity.get("recommended_duration", "")
+                                    st.markdown(f"### {time}")
+                                    st.write(f"**المكان:** {place_name}")
+
+                                    if description:
+                                        st.write(description)
+
+                                    if duration:
+                                        st.caption(f"المدة المقترحة: {duration}")
+
+                            else:
+                                    st.info(
+                                        day_plan.get(
+                                                "note",
+                                                "لا تتوفر أنشطة موثوقة لهذا اليوم."
+                                                )
+                                                )
+      
                 if result.get("budget") and "breakdown_sar" in result["budget"]:
                     st.markdown("### توزيع الميزانية التقديري (SAR):")
                     b_data = result["budget"]["breakdown_sar"]
@@ -347,6 +368,9 @@ if st.button("إرسال والاستفسار", type="primary", key="submit_btn"
                     f"الأدوات المستخدمة: {', '.join(result.get('tools_used', []))}"
                 )
                 if result.get("sources"):
-                    st.caption(
-                        f"المصادر المستند عليها: {', '.join(result.get('sources'))}"
+                    st.caption("المصادر المستند عليها:")
+
+                    for source in result["sources"]:
+                        st.write(
+                            f"• {source.get('place_name', '')} - {source.get('source_name', '')}"
                     )

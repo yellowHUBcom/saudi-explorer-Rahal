@@ -225,6 +225,8 @@ def run_pipeline(input_payload: dict[str, Any]) -> dict[str, Any]:
     question = str(input_payload.get("question") or "").strip()
     destination = _normalize_destination(input_payload.get("destination"))
     warnings: list[str] = []
+    rag_query = question
+    rag_top_k = 4
 
     # Support image-only requests without changing vision.py or app.py.
     if not question and image is not None:
@@ -235,42 +237,65 @@ def run_pipeline(input_payload: dict[str, Any]) -> dict[str, Any]:
             "يرجى كتابة سؤال متعلق بالرحلة.",
             "EMPTY_QUESTION",
         )
-
+    vision_result = {
+    "status": "unsupported",
+    "destination": None,
+    "landmark": None,
+}
     if image is not None:
         try:
             vision_result = _identify_landmark(image)
+            print("VISION RESULT:", vision_result)
         except Exception:
-            vision_result = {
-                "status": "error",
-                "destination": None,
-                "error": "VISION_FAILURE",
-            }
+         vision_result = {
+            "status": "error",
+            "destination": None,
+            "landmark": None,
+            "error": "VISION_FAILURE",
+        }
 
-        if not isinstance(vision_result, dict):
-            vision_result = {"status": "error", "destination": None}
+    if not isinstance(vision_result, dict):
+        vision_result = {
+            "status": "error",
+            "destination": None,
+            "landmark": None,
+        }
 
-        vision_status = str(vision_result.get("status") or "error").casefold()
-        vision_destination = _normalize_destination(
-            vision_result.get("destination")
-        )
+    vision_status = str(
+        vision_result.get("status") or "error"
+    ).casefold()
 
-        if vision_status == "supported" and vision_destination:
-            if destination and destination != vision_destination:
-                warnings.append(
-                    "تم اعتماد الوجهة التي تعرّف عليها تحليل الصورة بدلًا من "
-                    "الاختيار اليدوي."
-                )
-            destination = vision_destination
-        elif destination:
+    vision_destination = _normalize_destination(
+        vision_result.get("destination")
+    )
+
+    vision_landmark = str(
+        vision_result.get("landmark") or ""
+    ).strip()
+
+    if vision_status == "supported" and vision_destination:
+        if destination and destination != vision_destination:
             warnings.append(
-                "لم يُعتمد تحليل الصورة، لذلك استُخدمت الوجهة المختارة يدويًا."
+                "تم اعتماد الوجهة التي تعرّف عليها تحليل الصورة بدلًا من "
+                "الاختيار اليدوي."
             )
-        else:
-            return _error(
-                "تعذّر تحديد وجهة مدعومة من الصورة؛ يرجى اختيار الوجهة يدويًا.",
-                "MANUAL_DESTINATION_REQUIRED",
-                warnings=warnings,
-            )
+
+        destination = vision_destination
+
+        if vision_landmark:
+            rag_query = vision_landmark
+            rag_top_k = 4
+
+    elif destination:
+        warnings.append(
+            "لم يُعتمد تحليل الصورة، لذلك استُخدمت الوجهة المختارة يدويًا."
+        )
+    else:
+        return _error(
+            "تعذّر تحديد وجهة مدعومة من الصورة؛ يرجى اختيار الوجهة يدويًا.",
+            "MANUAL_DESTINATION_REQUIRED",
+            warnings=warnings,
+        )
 
     if destination is None:
         raw_destination = input_payload.get("destination")
@@ -332,13 +357,32 @@ def run_pipeline(input_payload: dict[str, Any]) -> dict[str, Any]:
             warnings=warnings,
         )
     interests = [str(item).strip() for item in raw_interests if str(item).strip()]
-
     try:
+        print("RAG QUERY:", repr(rag_query))
+        print("RAG DESTINATION:", repr(destination))
+        print("RAG TOP K:", rag_top_k)
+
         context = _retrieve_context(
-            query=question,
+            query=rag_query,
             destination=destination,
-            top_k=4,
+            top_k=rag_top_k,
         )
+
+        print("RAG CONTEXT BEFORE FILTER:", context)
+
+        if vision_landmark and context:
+            exact_matches = [
+                record
+                for record in context
+                if str(record.get("place_name", "")).strip().casefold()
+                == vision_landmark.strip().casefold()
+            ]
+
+            if exact_matches:
+                context = exact_matches
+
+        print("RAG CONTEXT AFTER FILTER:", context)
+
     except Exception:
         return _error(
             "تعذّر الوصول إلى قاعدة المعرفة حاليًا.",
@@ -367,6 +411,7 @@ def run_pipeline(input_payload: dict[str, Any]) -> dict[str, Any]:
                 "interests": interests,
             },
         )
+
     except Exception:
         return _error(
             "تعذّر على الوكيل معالجة الطلب. يرجى المحاولة مرة أخرى.",
