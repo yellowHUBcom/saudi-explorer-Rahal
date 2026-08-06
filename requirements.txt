@@ -17,3 +17,4 @@ python-dotenv>=1.0,<2
 
 # Tests
 pytest>=8,<9
+python-dotenv
