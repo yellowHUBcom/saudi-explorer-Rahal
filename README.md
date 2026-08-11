@@ -5,18 +5,6 @@
 
 
 
-## 👥 فريق العمل (Project Team)
-
-تم تطوير هذا المشروع كعمل جماعي تكاملي ضمن برنامج سدايا.
-
-| Team Member | Role |
-|---|---|
-| [Raneem Saif Aldawsari](https://github.com/98raneemsaif-create) | Data & RAG Engineer |
-| Danah Abdulkarim Alhamdi | Agent & Tools |
-| Lama Abdullah Aldraim | Frontend & Vision |
-| Lujain Radi Alrimali | Deployment & Integration |
-
-
 </div>
 
 ---
@@ -30,11 +18,15 @@
 
 ## 👥 فريق العمل (Project Team)
 
-تم تطوير هذا المشروع كعمل جماعي تكاملي بين طالبات سدايا:
-👩‍💻 [Raneem Saif Aldawsari](https://github.com/98raneemsaif-create) | Data & RAG Engineer
-👩‍💻 [Danah Abdulkarim Alhamdi](GITHUB_PROFILE_URL) | Agent & Tools 
-👩‍💻 [Lama Abdullah Aldraim](GITHUB_PROFILE_URL) | Frontend & Vision 
-👩‍💻 [Lujain Radi Alrimali](GITHUB_PROFILE_URL) | Deployment & Integration
+تم تطوير هذا المشروع كعمل جماعي تكاملي ضمن برنامج سدايا.
+
+| Team Member | Role |
+|---|---|
+| [Raneem Saif Aldawsari](https://github.com/98raneemsaif-create) | Data & RAG Engineer |
+| Danah Abdulkarim Alhamdi | Agent & Tools |
+| Lama Abdullah Aldraim | Frontend & Vision |
+| Lujain Radi Alrimali | Deployment & Integration |
+
 ---
 
 ## 🎯 التحدي والمشكلة (The Challenge)
