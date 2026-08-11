@@ -9,13 +9,6 @@
 
 ---
 
-## 🏛️ الإشراف الأكاديمي (Supervision)
-
-* **المشرف على المشروع:** Eng. Hussain Alyafei  
-  *AI & Data Specialist | KAUST AI Graduate | B.S. AI | Microsoft Certified*
-
----
-
 ## 👥 فريق العمل (Project Team)
 
 تم تطوير هذا المشروع كعمل جماعي تكاملي ضمن برنامج سدايا.
@@ -24,8 +17,16 @@
 |---|---|
 | [Raneem Saif Aldawsari](https://github.com/98raneemsaif-create) | Data & RAG Engineer |
 | Danah Abdulkarim Alhamdi | Agent & Tools |
-| Lama Abdullah Aldraim | Frontend & Vision |
+| [Lama Abdullah Aldraim](https://github.com/yellowHUBcom) | Frontend & Vision |
 | Lujain Radi Alrimali | Deployment & Integration |
+
+---
+
+
+## 🏛️ الإشراف الأكاديمي (Supervision)
+
+* **المشرف على المشروع:** Eng. Hussain Alyafei  
+  *AI & Data Specialist | KAUST AI Graduate | B.S. AI | Microsoft Certified*
 
 ---
 
