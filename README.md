@@ -16,9 +16,9 @@
 | Team Member | Role |
 |---|---|
 | [Raneem Saif Aldawsari](https://github.com/98raneemsaif-create) | Data & RAG Engineer |
-| Danah Abdulkarim Alhamdi | Agent & Tools |
+| [Danah Abdulkarim Alhamdi](https://github.com/danah1-a) | Agent & Tools |
 | [Lama Abdullah Aldraim](https://github.com/yellowHUBcom) | Frontend & Vision |
-| Lujain Radi Alrimali | Deployment & Integration |
+| [Lujain Radi Alrimali](https://github.com/Lujain-DS) | Deployment & Integration |
 
 ---
 
