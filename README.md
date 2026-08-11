@@ -4,11 +4,16 @@
 ### نظام ذكي متكامل لتخطيط المسارات السياحية واستكشاف معالم المملكة العربية السعودية
 
 
-[![Python](https://img.shields.io/badge/Python-3.11+-blue.svg?style=flat&logo=python)](https://www.python.org/)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.37+-red.svg?style=flat&logo=streamlit)](https://streamlit.io/)
-[![Gemini Vision](https://img.shields.io/badge/Gemini_Vision-1.5_Flash-orange.svg?style=flat&logo=google)](https://ai.google.dev/)
-[![Tests](https://img.shields.io/badge/Tests-Passing-brightgreen.svg?style=flat)]()
-[![License](https://img.shields.io/badge/License-MIT-green.svg?style=flat)](LICENSE)
+## 👥 فريق العمل (Project Team)
+
+تم تطوير هذا المشروع كعمل جماعي تكاملي ضمن برنامج سدايا.
+
+| Team Member | Role |
+|---|---|
+| [Raneem Saif Aldawsari](https://github.com/98raneemsaif-create) | Data & RAG Engineer |
+| Danah Abdulkarim Alhamdi | Agent & Tools |
+| Lama Abdullah Aldraim | Frontend & Vision |
+| Lujain Radi Alrimali | Deployment & Integration |
 
 *منصة سياحية ذكية تجمع بين تقنيات الرؤية الحاسوبية (Computer Vision) والنماذج اللغوية الضخمة (LLMs) لبناء مسارات سياحية مخصصة، التعرف الآلي على المعالم عبر الصور، وحساب ميزانيات السفر بدقة عالية.*
 
