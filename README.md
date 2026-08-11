@@ -3,6 +3,7 @@
 # 🗺️ Rahhal | رحّال
 ### نظام ذكي متكامل لتخطيط المسارات السياحية واستكشاف معالم المملكة العربية السعودية
 
+
 [![Python](https://img.shields.io/badge/Python-3.11+-blue.svg?style=flat&logo=python)](https://www.python.org/)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.37+-red.svg?style=flat&logo=streamlit)](https://streamlit.io/)
 [![Gemini Vision](https://img.shields.io/badge/Gemini_Vision-1.5_Flash-orange.svg?style=flat&logo=google)](https://ai.google.dev/)
