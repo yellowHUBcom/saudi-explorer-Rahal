@@ -13,14 +13,6 @@
 
 تم تطوير هذا المشروع كعمل جماعي تكاملي ضمن برنامج سدايا.
 
-| Team Member | Role |
-|---|---|
-| [Raneem Saif Aldawsari](https://github.com/98raneemsaif-create) | Data & RAG Engineer |
-| [Danah Abdulkarim Alhamdi](https://github.com/danah1-a) | Agent & Tools |
-| [Lama Abdullah Aldraim](https://github.com/yellowHUBcom) | Frontend & Vision |
-| [Lujain Radi Alrimali](https://github.com/Lujain-DS) | Deployment & Integration |
-
----
 
 
 ## 🏛️ الإشراف الأكاديمي (Supervision)
